@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useId, useState, useCallback, createContext } from "react";
 
 function pseudoRandomNumber(maximum: number, minimum: number) {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
@@ -25,20 +25,31 @@ async function randomNumber(maximum: number, minimum: number) {
   return chosen;
 }
 
-export function useRandomNumber(maximum: number, minimum = 0) {
-  const [trigger, setTrigger] = useState(0);
+type Context = {
+  formId: string;
+  number?: number | null;
+  min: number;
+  max: number;
+  requestNumber: () => void;
+};
+
+export const context = createContext<Context>({} as Context);
+
+export const Provider = ({ children }: any) => {
+  const formId = useId();
   const [number, setNumber] = useState<number | null>();
 
-  const requestNumber = useCallback(() => setTrigger(Date.now()), []);
+  const min = 0;
+  const max = 2;
 
-  useEffect(() => {
-    if (trigger) {
-      randomNumber(maximum, minimum).then((number) => setNumber(number));
-    }
-  }, [trigger]);
+  const requestNumber = useCallback(() => {
+    setNumber(null);
+    randomNumber(max, min).then((number) => setNumber(number));
+  }, []);
 
-  return {
-    number,
-    requestNumber,
-  };
-}
+  return (
+    <context.Provider value={{ formId, number, min, max, requestNumber }}>
+      {children}
+    </context.Provider>
+  );
+};

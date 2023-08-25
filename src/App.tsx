@@ -1,24 +1,7 @@
-import { useId, createContext } from "react";
 import { Spinner } from "./Spinner";
 import { Adder } from "./Adder";
 import { Fields } from "./Fields";
-
-export const context = createContext({
-  formId: "",
-
-  min: 0,
-  max: 2,
-});
-
-const Provider = ({ children }: any) => {
-  const formId = useId();
-  const min = 0;
-  const max = 2;
-
-  return (
-    <context.Provider value={{ formId, min, max }}>{children}</context.Provider>
-  );
-};
+import { Provider } from "./context";
 
 const App = () => (
   <Provider>

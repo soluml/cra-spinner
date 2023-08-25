@@ -1,13 +1,11 @@
 import { useContext } from "react";
-import { context } from "../App";
-import { useRandomNumber } from "../Fields/hooks/useRandomNumber";
+import { context } from "../context";
 import styles from "./index.module.css";
 
 export function Spinner() {
-  const { formId, max, min } = useContext(context);
-  const { number } = useRandomNumber(max, min);
+  const { formId, number } = useContext(context);
 
-  console.log({ number });
+  console.log("spinner", { number });
 
   return (
     <div className={styles.container}>

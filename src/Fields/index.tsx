@@ -1,11 +1,11 @@
 import { useContext, useCallback } from "react";
-import { context } from "../App";
-import { useRandomNumber } from "./hooks/useRandomNumber";
+import { context } from "../context";
 import styles from "./index.module.css";
 
 export function Fields() {
-  const { formId, min, max } = useContext(context);
-  const { requestNumber } = useRandomNumber(max, min);
+  const { formId, requestNumber } = useContext(context);
+
+  console.log("fields");
 
   const onSubmit = useCallback(
     (evt: React.FormEvent<HTMLFormElement>) => {
