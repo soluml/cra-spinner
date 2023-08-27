@@ -28,6 +28,7 @@ async function randomNumber(maximum: number, minimum: number) {
 type Context = {
   formId: string;
   number?: number | null;
+  spin: boolean;
   min: number;
   max: number;
   requestNumber: () => void;
@@ -38,17 +39,23 @@ export const context = createContext<Context>({} as Context);
 export const Provider = ({ children }: any) => {
   const formId = useId();
   const [number, setNumber] = useState<number | null>();
+  const [spin, setSpin] = useState(false);
 
   const min = 0;
   const max = 2;
 
   const requestNumber = useCallback(() => {
     setNumber(null);
-    randomNumber(max, min).then((number) => setNumber(number));
+    setSpin(true);
+
+    Promise.all([
+      randomNumber(max, min).then((number) => setNumber(number)),
+      new Promise((resolve) => setTimeout(resolve, 15000)),
+    ]).then(() => setSpin(false));
   }, []);
 
   return (
-    <context.Provider value={{ formId, number, min, max, requestNumber }}>
+    <context.Provider value={{ formId, number, min, max, requestNumber, spin }}>
       {children}
     </context.Provider>
   );

@@ -22,13 +22,13 @@
 
   display: grid;
   grid-area: spinner;
+  overflow: hidden;
   place-items: center;
   height: 100%;
   width: 100%;
 }
 
 .spinner {
-  /* animation: spin 10s linear infinite; */
   aspect-ratio: 1;
   background:
     radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.05) 40%, rgba(255, 255, 255, .1) 58%, rgba(255, 255, 255, .2) 65%, rgba(0, 0, 0, 0.1) 75%),
@@ -49,6 +49,15 @@
   transform: translateZ(0);
   user-select: none;
   width: clamp(300px, 80vmin, 1000px);
+}
+
+.spinner--start {
+  animation: spin 0.25s linear infinite;
+}
+
+.spinner--stop {
+  animation: none;
+  transition: transform 10s ease-in;
 }
 
 .spinner li {
@@ -75,6 +84,21 @@
 }
 
 .button {
+  aspect-ratio: 1;
+  background:
+    linear-gradient(to bottom, #dbdbdb, #f9f9f9, #dbdbdb),
+    linear-gradient(30deg,
+      transparent 20%,
+      transparent 40%,
+      rgb(255, 255, 255, 0.4) 50%,
+      rgb(255, 255, 255, 0.4) 55%,
+      transparent 70%,
+      transparent 100%);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 1.5cqmin;
   grid-area: 1/1 /1/1;
   isolation: isolate;
+  padding: 1em;
 }
