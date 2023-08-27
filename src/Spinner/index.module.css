@@ -12,6 +12,14 @@
 /* https://dribbble.com/shots/14947552-Marble-Game-Spin-Button/attachments/6664552?mode=media */
 
 .container {
+  --color1: #ff4286;
+  --color2: #ad2ff5;
+  --color3: #00b99d;
+  --color4: #89ec21;
+  --color5: #ffde58;
+
+
+
   display: grid;
   grid-area: spinner;
   place-items: center;
@@ -22,7 +30,11 @@
 .spinner {
   /* animation: spin 10s linear infinite; */
   aspect-ratio: 1;
-  background: conic-gradient(red 0deg, red 120deg, orange 120deg, orange 240deg, yellow 240deg, yellow 360deg);
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.05) 40%, rgba(255, 255, 255, .1) 58%, rgba(255, 255, 255, .2) 65%, rgba(0, 0, 0, 0.1) 75%),
+    conic-gradient(var(--color1) 0deg, var(--color1) 120deg, transparent 120deg, transparent 240deg, var(--color4) 240deg, var(--color4) 360deg),
+    #fff;
+  ;
   background-clip: padding-box;
   box-shadow: rgba(0, 0, 0, 0.18) 0 2cqmin 8cqmin;
 
